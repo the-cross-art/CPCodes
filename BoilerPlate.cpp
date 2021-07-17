@@ -9,4 +9,6 @@ int main (){
     freopen("output.txt" , "w" , stdout);
   #endif
   //CodeHere
+
+  return 0;
 }
