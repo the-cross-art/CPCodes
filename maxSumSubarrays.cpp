@@ -26,7 +26,7 @@ int main (){
   for (int i = 1; i <= n; i++)
   {
       int sum =0;
-      for (int j = 0; j < n; j++)
+      for (int j = 0; j < i; j++)
       {
           sum = currsum[i] - currsum[j];
           maxSum = max(sum,maxSum);
