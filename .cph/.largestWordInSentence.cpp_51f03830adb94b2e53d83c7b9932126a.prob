@@ -1,0 +1,1 @@
+{"name":"Local: largestWordInSentence","url":"c:\\Users\\imran\\Downloads\\Projects\\c++\\largestWordInSentence.cpp","tests":[{"id":1627715977367,"input":"10\ndo or die","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\imran\\Downloads\\Projects\\c++\\largestWordInSentence.cpp","group":"local","local":true}
