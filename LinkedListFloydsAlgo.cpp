@@ -56,6 +56,15 @@ void deleteAtTail(node* &head,int val){
     delete todelete;
 }
 
+void display(node* head){
+    node* temp = head;
+    while(temp != NULL){
+        cout<<temp->data<<"->";
+        temp = temp->next;
+    }
+    cout<<"NULL"<<endl;
+}
+
 void makeCycle(node* &head, int pos){
     node* temp=head;
     node* startNode;
@@ -88,6 +97,24 @@ bool detectCycle(node* &head){
     return false;
 }
 
+void removeCycle(node* &head){
+    node* slow=head;
+    node* fast=head;
+
+    do{
+        slow=slow->next;
+        fast=fast->next->next;
+    }while(slow!=fast);
+
+    fast=head;
+    while(slow->next!=fast->next){
+        slow=slow->next;
+        fast=fast->next;
+    }
+
+    slow->next=NULL;
+}
+
 int main(){
 
     node* head = NULL;
@@ -102,5 +129,8 @@ int main(){
     makeCycle(head,3);
     cout<<detectCycle(head)<<endl;
 
+    removeCycle(head);
+    cout<<detectCycle(head)<<endl;
+    display(head);
 
 }
