@@ -1,50 +1,141 @@
-// C++ code to find whether an array is subset of
-// another array
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
 
-/* Return true if arr2[] is a subset of arr1[] */
-bool isSubset(int arr1[], int m,
-              int arr2[], int n)
+typedef struct node
 {
+    int data;
+    struct node *next;
+} node;
 
-    // Using STL set for hashing
-    set<int> hashset;
+node *merge(node *p, node *q, node *sorting)
+{
+    node *head3;
 
-    // hset stores all the values of arr1
-    for (int i = 0; i < m; i++)
+    if (p == NULL)
+        return q;
+    if (q == NULL)
+        return p;
+
+    if (p && q)
     {
-        hashset.insert(arr1[i]);
-    }
-
-    // loop to check if all elements of arr2 also
-    // lies in arr1
-    for (int i = 0; i < n; i++)
-    {
-        // cout << hashset.end();
-        // cout << hashset.find(arr2[i]);
-        if (hashset.find(arr2[i]) == hashset.end())
+        if (p->data <= q->data)
         {
-            return false;
+            sorting = p;
+            p = sorting->next;
+        }
+        else
+        {
+            sorting = q;
+            q = sorting->next;
         }
     }
-    return true;
+
+    head3 = sorting;
+
+    while (p && q)
+    {
+        if (p->data <= q->data)
+        {
+            sorting->next = p;
+            sorting = p;
+            p = sorting->next;
+        }
+        else
+        {
+            sorting->next = q;
+            sorting = q;
+            q = sorting->next;
+        }
+    }
+
+    if (p == NULL)
+    {
+        sorting->next = q;
+    }
+
+    if (q == NULL)
+    {
+        sorting->next = p;
+    }
+
+    return head3;
 }
 
-// Driver Code
 int main()
 {
-    int arr1[] = {11, 1, 13, 21, 3, 7};
-    int arr2[] = {11, 3, 7, 98};
-    int m = sizeof(arr1) / sizeof(arr1[0]);
-    int n = sizeof(arr2) / sizeof(arr2[0]);
+    node *p = NULL, *q = NULL, *head1 = NULL, *head2 = NULL, *sorting = NULL;
+    int n1, n2, a, i, n;
 
-    if (isSubset(arr1, m, arr2, n))
-        cout << "arr2[] is subset of arr1[] "
-             << "\n";
-    else
-        cout << "arr2[] is not a subset of arr1[] "
-             << "\n";
+    printf("Enter the number of nodes in the First Linked List");
+    scanf("%d", &n1);
+
+    printf("Enter the number of nodes in the second Linked List");
+    scanf("%d", &n2);
+
+    if (n1 > 0)
+    {
+        printf("Enter the first Linked List");
+        scanf("%d", &a);
+        p = (node *)malloc(sizeof(node));
+        p->data = a;
+        p->next = NULL;
+        head1 = p;
+    }
+
+    for (i = 1; i < n1; i++)
+    {
+        scanf("%d", &a);
+        q = (node *)malloc(sizeof(node));
+        q->data = a;
+        q->next = NULL;
+        p->next = q;
+        p = p->next;
+    }
+
+    if (n2 > 0)
+    {
+        printf("Enter the second Linked List");
+        scanf("%d", &a);
+        p = (node *)malloc(sizeof(node));
+        p->data = a;
+        p->next = NULL;
+        head2 = p;
+    }
+
+    for (i = 1; i < n2; i++)
+    {
+        scanf("%d", &a);
+        q = (node *)malloc(sizeof(node));
+        q->data = a;
+        q->next = NULL;
+        p->next = q;
+        p = p->next;
+    }
+    p = head1;
+    q = head2;
+    printf("\n First Linked List => ");
+    while (p != NULL)
+    {
+        printf("%d  ", p->data);
+        p = p->next;
+    }
+
+    printf("\n Second Linked List =>");
+    while (q != NULL)
+    {
+        printf("%d  ", q->data);
+        q = q->next;
+    }
+
+    p = head1;
+    q = head2;
+    sorting = merge(p, q, sorting);
+
+    printf("\n Sorted Merged Linked List =>");
+    while (sorting != NULL)
+    {
+        printf("%d  ", sorting->data);
+        sorting = sorting->next;
+    }
     return 0;
 }
-// This code is contributed by Satvik Shrivas
