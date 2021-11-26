@@ -34,7 +34,10 @@ void quickSort(int a[], int l, int r)
 int main()
 {
 
-    int a[] = {5, 4, 3, 2, 1, -1};
+    int a[5];
+    for(int i=0;i<5;i++){
+        cin>>a[i];
+    }
     quickSort(a, 0, 5);
     for (int i = 0; i < 6; i++)
     {
